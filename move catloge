@@ -1,0 +1,57 @@
+https://codesandbox.io/s/movie-catalogue-react-challenge-forked-cnmh4p?file=/src/components/organisms/MovieCatalogue.tsx:976-989
+
+import { CSSProperties, FC, useState } from "react";
+
+const movieItemStyle = (selected?: boolean): CSSProperties => {
+  return {
+    backgroundColor: selected ? "#a9b3c4" : "#ececec",
+    fontWeight: selected ? "bold" : "normal",
+    cursor: "pointer",
+    paddingLeft: "0.75em",
+    paddingRight: "0.75em",
+    paddingTop: "0.2em",
+    paddingBottom: "0.2em",
+    color: "##1a1a1a"
+  };
+};
+
+export type MovieItemProps = {
+  id: string;
+  title: string;
+  selected?: boolean;
+  movie: any
+};
+
+const MovieItem: FC<MovieItemProps> = ({movie, title, selected }) => {
+  const [show, setShow] = useState(false)
+  const handleClick = ()=>{
+    setShow(!show)
+  }
+  return (<>
+    <div style={movieItemStyle(selected)} onClick={handleClick}>
+      {title}
+    </div>
+    {
+      show && <div style={{margin:"15px" , border:"2px solid black" , padding:"10px"}}>
+       <div >
+      <img  style ={{height : "60px", width :"60px"}} src={movie.poster}/>
+    </div>
+         <div >
+      year : {movie.year}
+    </div>
+    <div >
+      Director : {movie.director}
+    </div>
+    <div >
+      Cast : {movie.cast}
+    </div>
+    <div >
+      genre : {movie.genre}
+    </div>
+      </div>
+    }
+    </>
+  );
+};
+
+export default MovieItem;
